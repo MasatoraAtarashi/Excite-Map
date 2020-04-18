@@ -14,10 +14,11 @@ development:
 test:
   <<: *default
   database: myapp_test
- 
+  
 production:
   <<: *default
-  host: <%= Rails.application.credentials.rds[:host] %>
-  database: <%= Rails.application.credentials.rds[:database] %>
-  username: <%= Rails.application.credentials.rds[:username] %>
-  password: <%= Rails.application.credentials.rds[:password] %>
+  host: excitemap-database.c3dwg1z8bl5l.ap-northeast-1.rds.amazonaws.com
+  database: excitemap_database
+  username: postgres
+  password: 'postgres'
+
