@@ -1,13 +1,13 @@
 FROM ruby:2.6.4
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client build-essential libpq-dev vim
 
-RUN mkdir /myapp
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+RUN mkdir /app
+WORKDIR /app
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 RUN bundle install
-COPY . /myapp
-RUN mkdir -p tmp/socket
+COPY . /app
+RUN mkdir -p tmp/sockets
 
 # Expose volumes to frontend
 VOLUME /app/public
