@@ -1,4 +1,5 @@
 class Api::SpotsController < ApplicationController
+  protect_from_forgery
 
   def index
     @spots = Spot.all
