@@ -15,9 +15,10 @@ services:
   web:
     build: .
     volumes:
+      - .:/app
       - /app/log # persist logs
     depends_on:
       - db
-    environment:
-      RAILS_ENV: 'production'
-      RACK_ENV: 'production'
+    #environment:
+      #RAILS_ENV: 'production'
+      #RACK_ENV: 'production'
