@@ -9,7 +9,7 @@ class Api::SpotsController < ApplicationController
         title: spot.title,
         comment: spot.comment,
         mood: spot.mood,
-        image: spot.image,
+        picture: spot.picture.url,
         latitude: spot.latitude,
         longitude: spot.longitude
       }
@@ -24,7 +24,7 @@ class Api::SpotsController < ApplicationController
       title: @spot.title,
       comment: @spot.comment,
       mood: @spot.mood,
-      image: @spot.image,
+      picture: @spot.picture.url,
       latitude: @spot.latitude,
       longitude: @spot.longitude
     }
@@ -40,9 +40,10 @@ class Api::SpotsController < ApplicationController
           title: @spot.title,
           comment: @spot.comment,
           mood: @spot.mood,
-          image: @spot.image,
+          picture: @spot.picture,
           latitude: @spot.latitude,
-          longitude: @spot.longitude
+          longitude: @spot.longitude,
+          params: spot_params
         }
       render json: spot_json
     else
@@ -62,7 +63,7 @@ class Api::SpotsController < ApplicationController
           title: @spot.title,
           comment: @spot.comment,
           mood: @spot.mood,
-          image: @spot.image,
+          picture: @spot.picture.url,
           latitude: @spot.latitude,
           longitude: @spot.longitude
         }
@@ -79,6 +80,11 @@ class Api::SpotsController < ApplicationController
 
   private
     def spot_params
-      params.require(:spot).permit(:id, :title, :comment, :mood, :image, :latitude, :longitude)
+      puts "unko"
+      puts "unko"
+      puts params[:spot][:picture]
+      puts "unko"
+      puts "unko"
+      params.require(:spot).permit(:id, :title, :comment, :mood, :picture, :latitude, :longitude)
     end
 end

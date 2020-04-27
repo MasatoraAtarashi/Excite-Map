@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_104252) do
+ActiveRecord::Schema.define(version: 2020_04_27_091752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,13 @@ ActiveRecord::Schema.define(version: 2020_04_25_104252) do
     t.string "title"
     t.string "comment"
     t.string "string"
-    t.string "image"
     t.string "mood"
     t.string "latitude"
     t.string "float"
     t.string "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "picture"
   end
 
 end
