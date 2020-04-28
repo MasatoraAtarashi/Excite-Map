@@ -51,11 +51,8 @@ class Api::SpotsController < ApplicationController
     end
   end
 
-  def show
-    render json: { "chinko": "unko" }
-  end
-
   def update
+    @spot = Spot.find(params[:id])
     if @spot.update(spot_params)
       spot_json =
         {
@@ -80,11 +77,6 @@ class Api::SpotsController < ApplicationController
 
   private
     def spot_params
-      puts "unko"
-      puts "unko"
-      puts params[:spot][:picture]
-      puts "unko"
-      puts "unko"
       params.require(:spot).permit(:id, :title, :comment, :mood, :picture, :latitude, :longitude)
     end
 end
