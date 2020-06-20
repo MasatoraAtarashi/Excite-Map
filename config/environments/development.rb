@@ -63,4 +63,6 @@ Rails.application.configure do
   
   config.cache_classes = false
   config.reload_classes_only_on_change = false
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 80 }
 end

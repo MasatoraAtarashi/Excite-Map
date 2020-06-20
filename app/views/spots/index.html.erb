@@ -1,2 +1,31 @@
-<h1>Spots#index</h1>
-<p>Find me in app/views/spots/index.html.erb</p>
+<div class="col-md-8">
+<% if @spots.any? %>
+  <h3>エキサイトプレイス一覧 (<%= @spots.count %>)</h3>
+  <% @spots.map do |spot| %>
+    <%= "ID: #{spot.id}" %>
+    </br> 
+    <%= "TITLEd: #{spot.title}" %>
+    </br>
+    <%= "MOOD: #{spot.mood}" %>
+    </br>
+    <%= "COMMENT: #{spot.comment}" %>
+    </br>
+    <%= "LATITUDE: #{spot.latitude}" %>
+    </br>
+    <%= "LONGITUDE: #{spot.longitude}" %>
+    </br>
+    <%= image_tag spot.picture if spot.picture? %>
+    </br>
+    <%= "USER: #{User.find_by(id: spot.user_id).email}" %>
+    </br>
+    <% if user_signed_in? %>
+        <% if current_user.admin %>
+            <%= button_to 'delete', spot, method: :delete, data: { confirm: "You sure?" } %>
+        <% end %> 
+    <% end %>
+    </br>
+  <% end %>
+<% else %>
+    <h3>not found</h3> 
+<% end %>
+</div>

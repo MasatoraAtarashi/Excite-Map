@@ -1,0 +1,18 @@
+<div class="col-md-8">
+<% if @users.any? %>
+  <h3>ユーザ一覧 (<%= @users.count %>)</h3>
+  <% @users.map do |user| %>
+    <%= "id: #{user.id}" %>
+    </br>
+    <%= "email: #{user.email}" %>
+    <% if user_signed_in? %>
+        <% if current_user.admin && !user.admin %>
+            <%= button_to 'delete', user, method: :delete, data: { confirm: "You sure?" } %>
+        <% end %> 
+    <% end %>
+    </br>
+  <% end %>
+<% else %>
+    <h3>not found</h3> 
+<% end %>
+</div>
