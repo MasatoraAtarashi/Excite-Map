@@ -272,6 +272,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :twitter, "gEgDaO9HJET7q8OD92olz6NrJ", "Mvji6x1omoPoDPlPVFOsZh2es355AMwK8wpJqsca8kQbVQUCpE", callback_url: "http://ec2-54-168-87-215.ap-northeast-1.compute.amazonaws.com/users/omniauth_callbacks"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
