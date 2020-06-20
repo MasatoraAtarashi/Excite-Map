@@ -7,9 +7,26 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+    </head>
 
   <body>
+    <header>
+      <nav>
+        <%= link_to 'ホーム', admin_path %> 
+          <% if user_signed_in? %>
+            <%= link_to 'ユーザー一覧', users_index_path %> 
+            <%= link_to 'エキサイトプレイス追加', new_spot_path %> 
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to 'ログイン', new_user_session_path %>
+          <% end %>
+      </nav>
+    </header>
+    <h1>ExciteMap管理者専用ページ</h1>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

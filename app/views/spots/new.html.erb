@@ -1,2 +1,19 @@
-<h1>Spots#new</h1>
-<p>Find me in app/views/spots/new.html.erb</p>
+<h3>spot追加</h3>
+<%= form_for(@spot) do |f| %>
+    <div class="field">
+        <%= f.text_area :title, value: "Compose new spot..." %>
+        </br>
+        <%= f.text_area :mood, value: "Compose new spot..." %>
+        </br>
+        <%= f.text_area :comment, value: "Compose new spot..." %>
+        </br>
+        <%= f.text_area :latitude, value: "Compose new spot..." %>
+        </br>
+        <%= f.text_area :latitude, value: "Compose new spot..." %>
+        </br>
+        <%= f.number_field(:latitude, in: 1.0..20.0, step: 0.5,  :value => 1)%>
+        </br>
+        <%= f.number_field(:longitude, in: 1.0..20.0, step: 0.5, :value => 1)%>
+    </div>
+    <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>

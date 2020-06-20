@@ -43,7 +43,6 @@ class Api::SpotsController < ApplicationController
           picture: @spot.picture,
           latitude: @spot.latitude,
           longitude: @spot.longitude,
-          params: spot_params
         }
       render json: spot_json
     else
@@ -77,6 +76,6 @@ class Api::SpotsController < ApplicationController
 
   private
     def spot_params
-      params.require(:spot).permit(:id, :title, :comment, :mood, :picture, :latitude, :longitude)
+      params.require(:spot).permit(:id, :title, :comment, :mood, :picture, :latitude, :longitude, :user_id)
     end
 end
