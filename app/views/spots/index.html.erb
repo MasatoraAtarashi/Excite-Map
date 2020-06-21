@@ -14,7 +14,7 @@
     </br>
     <%= "LONGITUDE: #{spot.longitude}" %>
     </br>
-    <%= image_tag spot.picture if spot.picture? %>
+    <%= image_tag spot.pictre.url, :size =>'320x480' unless spot.pictre.url.nil? %>
     </br>
     <%= "USER: #{User.find_by(id: spot.user_id).email}" %>
     </br>
