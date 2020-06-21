@@ -16,7 +16,7 @@ services:
     build: .
     volumes:
       - .:/app
-      - /app/log # persist logs
+      - /log # persist logs
     depends_on:
       - db
     #environment:
