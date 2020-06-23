@@ -7,7 +7,7 @@ class Api::SpotsController < ApplicationController
       {
         id: spot.id,
         title: spot.title,
-        comment: spot.comment,
+        description: spot.description,
         mood: spot.mood,
         picture: spot.picture.url,
         latitude: spot.latitude,
@@ -26,7 +26,7 @@ class Api::SpotsController < ApplicationController
       {
         id: @spot.id,
         title: @spot.title,
-        comment: @spot.comment,
+        description: @spot.description,
         mood: @spot.mood,
         picture: @spot.picture.url,
         latitude: @spot.latitude,
@@ -45,7 +45,7 @@ class Api::SpotsController < ApplicationController
         {
           id: @spot.id,
           title: @spot.title,
-          comment: @spot.comment,
+          description: @spot.description,
           mood: @spot.mood,
           picture: @spot.picture.url,
           latitude: @spot.latitude,
@@ -67,7 +67,7 @@ class Api::SpotsController < ApplicationController
         {
           id: @spot.id,
           title: @spot.title,
-          comment: @spot.comment,
+          description: @spot.description,
           mood: @spot.mood,
           picture: @spot.picture.url,
           latitude: @spot.latitude,
@@ -89,6 +89,6 @@ class Api::SpotsController < ApplicationController
 
   private
     def spot_params
-      params.require(:spot).permit(:id, :title, :comment, :mood, :picture, :latitude, :longitude, :user_id, :is_excite_place)
+      params.require(:spot).permit(:id, :title, :description, :mood, :picture, :latitude, :longitude, :user_id, :is_excite_place)
     end
 end
