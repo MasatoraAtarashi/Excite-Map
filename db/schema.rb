@@ -10,14 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_073224) do
+ActiveRecord::Schema.define(version: 2020_06_23_095203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "spot_comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.bigint "spot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spot_id"], name: "index_spot_comments_on_spot_id"
+    t.index ["user_id", "spot_id"], name: "index_spot_comments_on_user_id_and_spot_id", unique: true
+    t.index ["user_id"], name: "index_spot_comments_on_user_id"
+  end
+
   create_table "spots", force: :cascade do |t|
     t.string "title"
-    t.string "comment"
+    t.string "description"
     t.string "string"
     t.string "mood"
     t.string "latitude"
@@ -27,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_06_20_073224) do
     t.datetime "updated_at", null: false
     t.string "picture"
     t.bigint "user_id"
+    t.boolean "is_excite_place"
     t.index ["id", "user_id"], name: "index_spots_on_id_and_user_id"
     t.index ["user_id"], name: "index_spots_on_user_id"
   end
@@ -52,5 +64,7 @@ ActiveRecord::Schema.define(version: 2020_06_20_073224) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "spot_comments", "spots"
+  add_foreign_key "spot_comments", "users"
   add_foreign_key "spots", "users"
 end

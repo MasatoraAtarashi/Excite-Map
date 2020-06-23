@@ -7,11 +7,14 @@ class Api::SpotsController < ApplicationController
       {
         id: spot.id,
         title: spot.title,
-        comment: spot.comment,
+        description: spot.description,
         mood: spot.mood,
         picture: spot.picture.url,
         latitude: spot.latitude,
-        longitude: spot.longitude
+        longitude: spot.longitude,
+        is_excite_place: spot.is_excite_place,
+        user: User.find_by(id: spot.user_id).email,
+        comments: SpotComment.where(spot_id: spot.id)
       }
     end
     render json: @spots
@@ -19,15 +22,19 @@ class Api::SpotsController < ApplicationController
 
   def show
     @spot = Spot.find(params[:id])
-    @spot = {
-      id: @spot.id,
-      title: @spot.title,
-      comment: @spot.comment,
-      mood: @spot.mood,
-      picture: @spot.picture.url,
-      latitude: @spot.latitude,
-      longitude: @spot.longitude
-    }
+    @spot = 
+      {
+        id: @spot.id,
+        title: @spot.title,
+        description: @spot.description,
+        mood: @spot.mood,
+        picture: @spot.picture.url,
+        latitude: @spot.latitude,
+        longitude: @spot.longitude,
+        is_excite_place: @spot.is_excite_place,
+        user: User.find_by(id: @spot.user_id).email,
+        comments: SpotComment.where(spot_id: @spot.id)
+      }
     render json: @spot
   end
 
@@ -38,11 +45,14 @@ class Api::SpotsController < ApplicationController
         {
           id: @spot.id,
           title: @spot.title,
-          comment: @spot.comment,
+          description: @spot.description,
           mood: @spot.mood,
-          picture: @spot.picture,
+          picture: @spot.picture.url,
           latitude: @spot.latitude,
           longitude: @spot.longitude,
+          is_excite_place: @spot.is_excite_place,
+          user: User.find_by(id: @spot.user_id).email,
+          comments: SpotComment.where(spot_id: @spot.id)
         }
       render json: spot_json
     else
@@ -57,11 +67,14 @@ class Api::SpotsController < ApplicationController
         {
           id: @spot.id,
           title: @spot.title,
-          comment: @spot.comment,
+          description: @spot.description,
           mood: @spot.mood,
           picture: @spot.picture.url,
           latitude: @spot.latitude,
-          longitude: @spot.longitude
+          longitude: @spot.longitude,
+          is_excite_place: @spot.is_excite_place,
+          user: User.find_by(id: @spot.user_id).email,
+          comments: SpotComment.where(spot_id: @spot.id)
         }
       render json: spot_json
     else
@@ -76,6 +89,6 @@ class Api::SpotsController < ApplicationController
 
   private
     def spot_params
-      params.require(:spot).permit(:id, :title, :comment, :mood, :picture, :latitude, :longitude, :user_id)
+      params.require(:spot).permit(:id, :title, :description, :mood, :picture, :latitude, :longitude, :user_id, :is_excite_place)
     end
 end

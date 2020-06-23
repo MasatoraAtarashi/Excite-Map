@@ -8,11 +8,13 @@
     </br>
     <%= "MOOD: #{spot.mood}" %>
     </br>
-    <%= "COMMENT: #{spot.comment}" %>
+    <%= "DESCRIPTION: #{spot.description}" %>
     </br>
     <%= "LATITUDE: #{spot.latitude}" %>
     </br>
     <%= "LONGITUDE: #{spot.longitude}" %>
+    </br>
+    <%= "IS_EXCITE_MAP?: #{spot.is_excite_place}" %>
     </br>
     <%= image_tag spot.picture.url, :size =>'150x150' unless spot.picture.url.nil? %>
     </br>

@@ -9,4 +9,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :spots, dependent: :destroy
+  has_many :spot_comments, dependent: :destroy
 end

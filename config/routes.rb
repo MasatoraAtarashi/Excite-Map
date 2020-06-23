@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'spot_comments/show'
+  get 'spot_comments/new'
+  get 'spot_comments/create'
+  get 'spot_comments/update'
+  get 'spot_comments/destroy'
   get '/admin' => 'spots#index', as: 'admin'
   
   devise_for :users
@@ -13,8 +18,8 @@ Rails.application.routes.draw do
 
   namespace :api, {format: 'json'} do
     resources :spots
+    resources :spot_comments
   end
 
-  # root 'static_pages#home'
   root 'static_pages#home'
 end
