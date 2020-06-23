@@ -1,5 +1,6 @@
 class Spot < ApplicationRecord
   belongs_to :user
+  has_many :spot_comments, dependent: :destroy
 
   mount_uploader :picture, PictureUploader
 

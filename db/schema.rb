@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_081415) do
+ActiveRecord::Schema.define(version: 2020_06_23_083648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "spot_comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.bigint "spot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spot_id"], name: "index_spot_comments_on_spot_id"
+    t.index ["user_id", "spot_id"], name: "index_spot_comments_on_user_id_and_spot_id", unique: true
+    t.index ["user_id"], name: "index_spot_comments_on_user_id"
+  end
 
   create_table "spots", force: :cascade do |t|
     t.string "title"
@@ -53,5 +64,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_081415) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "spot_comments", "spots"
+  add_foreign_key "spot_comments", "users"
   add_foreign_key "spots", "users"
 end
