@@ -13,7 +13,7 @@ class Api::SpotsController < ApplicationController
         latitude: spot.latitude,
         longitude: spot.longitude,
         is_excite_place: spot.is_excite_place,
-        user: User.find_by(id: spot.user_id).email,
+        user: User.find_by(id: spot.user_id),
         comments: SpotComment.where(spot_id: spot.id)
       }
     end
@@ -32,7 +32,7 @@ class Api::SpotsController < ApplicationController
         latitude: @spot.latitude,
         longitude: @spot.longitude,
         is_excite_place: @spot.is_excite_place,
-        user: User.find_by(id: @spot.user_id).email,
+        user: User.find_by(id: @spot.user_id),
         comments: SpotComment.where(spot_id: @spot.id)
       }
     render json: @spot
@@ -51,7 +51,7 @@ class Api::SpotsController < ApplicationController
           latitude: @spot.latitude,
           longitude: @spot.longitude,
           is_excite_place: @spot.is_excite_place,
-          user: User.find_by(id: @spot.user_id).email,
+          user: User.find_by(id: @spot.user_id),
           comments: SpotComment.where(spot_id: @spot.id)
         }
       render json: spot_json
@@ -73,7 +73,7 @@ class Api::SpotsController < ApplicationController
           latitude: @spot.latitude,
           longitude: @spot.longitude,
           is_excite_place: @spot.is_excite_place,
-          user: User.find_by(id: @spot.user_id).email,
+          user: User.find_by(id: @spot.user_id),
           comments: SpotComment.where(spot_id: @spot.id)
         }
       render json: spot_json
