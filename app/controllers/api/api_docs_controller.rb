@@ -13,6 +13,9 @@ class Api::ApiDocsController < ApplicationController
 
     SWAGGERED_CLASSES = [
         Api::SpotsController,
+        Spot,
+        SpotComment,
+        User,
         self,
     ].freeze
 
