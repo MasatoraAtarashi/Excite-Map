@@ -1,5 +1,36 @@
 class Api::SpotsController < ApplicationController
+  include Swagger::Blocks
+
   protect_from_forgery
+
+  swagger_path '/api/spots/{id}' do
+    operation :get do
+      key :description, 'Find a spot by ID'
+      key :operationId, :find_spot_by_id
+
+      parameter name: :id do
+        key :in, :path
+        key :description, 'Spot ID'
+        key :required, true
+        key :type, :integer
+        key :format, :int64
+      end
+      response 200 do
+        key :description, 'Spot'
+        schema do
+          # key :required, [:id, :title, :description, :mood, :picture, :latitude, :longitude, :is_excite_place, :user, :comments]
+          key :required, [:id, :title]
+          property :id do
+            key :type, :integer
+            key :format, :int64
+          end
+          property :title do
+            key :type, :string
+          end
+        end
+      end
+    end
+  end
 
   def index
     @spots = Spot.all
