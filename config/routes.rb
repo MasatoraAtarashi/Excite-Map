@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   namespace :api, {format: 'json'} do
     resources :spots
+    get '/excite-places' => 'spots#index_only_excite_places'
     resources :spot_comments
     resources :api_docs, only: [:index]
   end
