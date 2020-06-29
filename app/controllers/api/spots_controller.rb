@@ -73,6 +73,27 @@ class Api::SpotsController < ApplicationController
     render json: @spots
   end
 
+  def index_only_excite_places
+    @excite_places = Spot.where(is_excite_place: true)
+    @excite_places = @excite_places.map do |excite_place|
+      {
+        id: excite_place.id,
+        title: excite_place.title,
+        description: excite_place.description,
+        mood: excite_place.mood,
+        picture: excite_place.picture.url,
+        latitude: excite_place.latitude,
+        longitude: excite_place.longitude,
+        is_excite_place: excite_place.is_excite_place,
+        created_at: excite_place.created_at,
+        updated_at: excite_place.updated_at,
+        user: User.find_by(id: excite_place.user_id),
+        comments: SpotComment.where(spot_id: excite_place.id)
+      }
+    end
+    render json: @excite_places
+  end
+
   def show
     @spot = Spot.find(params[:id])
     @spot = 
