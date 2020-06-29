@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     resources :spots
     resources :spot_comments
+    resources :api_docs, only: [:index]
   end
 
   root 'static_pages#home'
