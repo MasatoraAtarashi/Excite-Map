@@ -19,3 +19,6 @@ services:
       - /log # persist logs
     depends_on:
       - db
+    #environment:
+      #RAILS_ENV: 'production'
+      #RACK_ENV: 'production'
