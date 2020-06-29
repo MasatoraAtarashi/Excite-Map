@@ -1,4 +1,41 @@
 class Spot < ApplicationRecord
+  include Swagger::Blocks
+
+  swagger_schema :Spot do
+    key :required, [:id, :title, :description, :mood, :picture, :latitude, :longitude, :is_excite_place, :user, :comments]
+    property :id do
+      key :type, :integer
+      key :format, :int64
+    end
+    property :title do
+      key :type, :string
+    end
+    property :description do
+      key :type, :string
+    end
+    property :mood do
+      key :type, :string
+    end
+    property :picture do
+      key :type, :string
+    end
+    property :latitude do
+      key :type, :string
+    end
+    property :longitude do
+      key :type, :string
+    end
+    property :is_excite_place do
+      key :type, :boolean
+    end
+    property :user do
+      key :'$ref', :User
+    end
+    property :comments do
+      key :'$ref', :SpotComment
+    end
+  end
+
   belongs_to :user
   has_many :spot_comments, dependent: :destroy
 

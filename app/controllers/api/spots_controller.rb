@@ -18,15 +18,35 @@ class Api::SpotsController < ApplicationController
       response 200 do
         key :description, 'Spot'
         schema do
-          # key :required, [:id, :title, :description, :mood, :picture, :latitude, :longitude, :is_excite_place, :user, :comments]
-          key :required, [:id, :title]
-          property :id do
-            key :type, :integer
-            key :format, :int64
+          key :'$ref', :Spot
+        end
+      end
+    end
+  end
+
+  swagger_path '/api/spots' do
+    operation :get do
+      key :summary, 'All Spots'
+      key :description, 'Returns all spots'
+      key :operationId, 'findSpots'
+      response 200 do
+        key :description, 'spot response'
+        schema do
+          key :type, :array
+          items do
+            key :'$ref', :Spot
           end
-          property :title do
-            key :type, :string
-          end
+        end
+      end
+    end
+
+    operation :post do
+      key :description, 'Creates a new spot'
+      key :operationId, 'addSpot'
+      response 200 do
+        key :description, 'spot response'
+        schema do
+          key :'$ref', :Spot
         end
       end
     end
@@ -44,6 +64,8 @@ class Api::SpotsController < ApplicationController
         latitude: spot.latitude,
         longitude: spot.longitude,
         is_excite_place: spot.is_excite_place,
+        created_at: spot.created_at,
+        updated_at: spot.updated_at,
         user: User.find_by(id: spot.user_id),
         comments: SpotComment.where(spot_id: spot.id)
       }
@@ -63,6 +85,8 @@ class Api::SpotsController < ApplicationController
         latitude: @spot.latitude,
         longitude: @spot.longitude,
         is_excite_place: @spot.is_excite_place,
+        created_at: @spot.created_at,
+        updated_at: @spot.updated_at,
         user: User.find_by(id: @spot.user_id),
         comments: SpotComment.where(spot_id: @spot.id)
       }
@@ -82,6 +106,8 @@ class Api::SpotsController < ApplicationController
           latitude: @spot.latitude,
           longitude: @spot.longitude,
           is_excite_place: @spot.is_excite_place,
+          created_at: @spot.created_at,
+          updated_at: @spot.updated_at,
           user: User.find_by(id: @spot.user_id),
           comments: SpotComment.where(spot_id: @spot.id)
         }
@@ -104,6 +130,8 @@ class Api::SpotsController < ApplicationController
           latitude: @spot.latitude,
           longitude: @spot.longitude,
           is_excite_place: @spot.is_excite_place,
+          created_at: @spot.created_at,
+          updated_at: @spot.updated_at,
           user: User.find_by(id: @spot.user_id),
           comments: SpotComment.where(spot_id: @spot.id)
         }
