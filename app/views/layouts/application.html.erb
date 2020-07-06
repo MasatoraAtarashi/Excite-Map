@@ -20,6 +20,7 @@
             <%= link_to 'エキサイトプレイス追加', new_spot_path %> 
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
           <% else %>
+            <%= link_to 'サインアップ', new_user_registration_path %>
             <%= link_to 'ログイン', new_user_session_path %>
           <% end %>
       </nav>
