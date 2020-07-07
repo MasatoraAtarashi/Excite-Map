@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  # include DeviseTokenAuth::Concerns::SetUserByToken
+  # protect_from_forgery with: :null_session
+  protect_from_forgery with: :null_session, if: ->{request.format.json?}
 
   def logged_in_user
     unless user_signed_in?

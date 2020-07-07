@@ -1,5 +1,11 @@
 class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+  include DeviseTokenAuth::Concerns::User
   include Swagger::Blocks
+
+  has_many :spots, dependent: :destroy
+  has_many :spot_comments, dependent: :destroy
 
   swagger_schema :User do
     key :required, [:id, :email, :created_at, :updated_at, :provider, :uid, :username, :admin]
@@ -30,15 +36,4 @@ class User < ApplicationRecord
     end
   end
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  has_many :spots, dependent: :destroy
-  has_many :spot_comments, dependent: :destroy
 end
