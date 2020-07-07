@@ -1,58 +1,79 @@
-                   Prefix Verb   URI Pattern                                                                              Controller#Action
-       spot_comments_show GET    /spot_comments/show(.:format)                                                            spot_comments#show
-        spot_comments_new GET    /spot_comments/new(.:format)                                                             spot_comments#new
-     spot_comments_create GET    /spot_comments/create(.:format)                                                          spot_comments#create
-     spot_comments_update GET    /spot_comments/update(.:format)                                                          spot_comments#update
-    spot_comments_destroy GET    /spot_comments/destroy(.:format)                                                         spot_comments#destroy
-                    admin GET    /admin(.:format)                                                                         spots#index
-         new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
-             user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
-     destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy
-        new_user_password GET    /users/password/new(.:format)                                                            devise/passwords#new
-       edit_user_password GET    /users/password/edit(.:format)                                                           devise/passwords#edit
-            user_password PATCH  /users/password(.:format)                                                                devise/passwords#update
-                          PUT    /users/password(.:format)                                                                devise/passwords#update
-                          POST   /users/password(.:format)                                                                devise/passwords#create
- cancel_user_registration GET    /users/cancel(.:format)                                                                  devise/registrations#cancel
-    new_user_registration GET    /users/sign_up(.:format)                                                                 devise/registrations#new
-   edit_user_registration GET    /users/edit(.:format)                                                                    devise/registrations#edit
-        user_registration PATCH  /users(.:format)                                                                         devise/registrations#update
-                          PUT    /users(.:format)                                                                         devise/registrations#update
-                          DELETE /users(.:format)                                                                         devise/registrations#destroy
-                          POST   /users(.:format)                                                                         devise/registrations#create
-                    spots GET    /spots(.:format)                                                                         spots#index
-                          POST   /spots(.:format)                                                                         spots#create
-                 new_spot GET    /spots/new(.:format)                                                                     spots#new
-                edit_spot GET    /spots/:id/edit(.:format)                                                                spots#edit
-                     spot GET    /spots/:id(.:format)                                                                     spots#show
-                          PATCH  /spots/:id(.:format)                                                                     spots#update
-                          PUT    /spots/:id(.:format)                                                                     spots#update
-                          DELETE /spots/:id(.:format)                                                                     spots#destroy
-           users_sign_out GET    /users/sign_out(.:format)                                                                users/sessions#destroy
-                     user GET    /users/:id(.:format)                                                                     users/registrations#show
-              users_index GET    /users(.:format)                                                                         users#index
-                          DELETE /users/:id(.:format)                                                                     users#destroy
-                api_spots GET    /api/spots(.:format)                                                                     api/spots#index {:format=>/json/}
-                          POST   /api/spots(.:format)                                                                     api/spots#create {:format=>/json/}
-             new_api_spot GET    /api/spots/new(.:format)                                                                 api/spots#new {:format=>/json/}
-            edit_api_spot GET    /api/spots/:id/edit(.:format)                                                            api/spots#edit {:format=>/json/}
-                 api_spot GET    /api/spots/:id(.:format)                                                                 api/spots#show {:format=>/json/}
-                          PATCH  /api/spots/:id(.:format)                                                                 api/spots#update {:format=>/json/}
-                          PUT    /api/spots/:id(.:format)                                                                 api/spots#update {:format=>/json/}
-                          DELETE /api/spots/:id(.:format)                                                                 api/spots#destroy {:format=>/json/}
-        api_excite_places GET    /api/excite-places(.:format)                                                             api/spots#index_only_excite_places {:format=>/json/}
-        api_spot_comments GET    /api/spot_comments(.:format)                                                             api/spot_comments#index {:format=>/json/}
-                          POST   /api/spot_comments(.:format)                                                             api/spot_comments#create {:format=>/json/}
-     new_api_spot_comment GET    /api/spot_comments/new(.:format)                                                         api/spot_comments#new {:format=>/json/}
-    edit_api_spot_comment GET    /api/spot_comments/:id/edit(.:format)                                                    api/spot_comments#edit {:format=>/json/}
-         api_spot_comment GET    /api/spot_comments/:id(.:format)                                                         api/spot_comments#show {:format=>/json/}
-                          PATCH  /api/spot_comments/:id(.:format)                                                         api/spot_comments#update {:format=>/json/}
-                          PUT    /api/spot_comments/:id(.:format)                                                         api/spot_comments#update {:format=>/json/}
-                          DELETE /api/spot_comments/:id(.:format)                                                         api/spot_comments#destroy {:format=>/json/}
-             api_api_docs GET    /api/api_docs(.:format)                                                                  api/api_docs#index {:format=>/json/}
-                     root GET    /                                                                                        static_pages#home
-       rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
-rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
-       rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
-update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
-     rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
+                      Prefix Verb     URI Pattern                                                                              Controller#Action
+          spot_comments_show GET      /spot_comments/show(.:format)                                                            spot_comments#show
+           spot_comments_new GET      /spot_comments/new(.:format)                                                             spot_comments#new
+        spot_comments_create GET      /spot_comments/create(.:format)                                                          spot_comments#create
+        spot_comments_update GET      /spot_comments/update(.:format)                                                          spot_comments#update
+       spot_comments_destroy GET      /spot_comments/destroy(.:format)                                                         spot_comments#destroy
+                       admin GET      /admin(.:format)                                                                         spots#index
+            new_user_session GET      /users/sign_in(.:format)                                                                 devise/sessions#new
+                user_session POST     /users/sign_in(.:format)                                                                 devise/sessions#create
+        destroy_user_session DELETE   /users/sign_out(.:format)                                                                devise/sessions#destroy
+           new_user_password GET      /users/password/new(.:format)                                                            devise/passwords#new
+          edit_user_password GET      /users/password/edit(.:format)                                                           devise/passwords#edit
+               user_password PATCH    /users/password(.:format)                                                                devise/passwords#update
+                             PUT      /users/password(.:format)                                                                devise/passwords#update
+                             POST     /users/password(.:format)                                                                devise/passwords#create
+    cancel_user_registration GET      /users/cancel(.:format)                                                                  devise/registrations#cancel
+       new_user_registration GET      /users/sign_up(.:format)                                                                 devise/registrations#new
+      edit_user_registration GET      /users/edit(.:format)                                                                    devise/registrations#edit
+           user_registration PATCH    /users(.:format)                                                                         devise/registrations#update
+                             PUT      /users(.:format)                                                                         devise/registrations#update
+                             DELETE   /users(.:format)                                                                         devise/registrations#destroy
+                             POST     /users(.:format)                                                                         devise/registrations#create
+                       spots GET      /spots(.:format)                                                                         spots#index
+                             POST     /spots(.:format)                                                                         spots#create
+                    new_spot GET      /spots/new(.:format)                                                                     spots#new
+                   edit_spot GET      /spots/:id/edit(.:format)                                                                spots#edit
+                        spot GET      /spots/:id(.:format)                                                                     spots#show
+                             PATCH    /spots/:id(.:format)                                                                     spots#update
+                             PUT      /spots/:id(.:format)                                                                     spots#update
+                             DELETE   /spots/:id(.:format)                                                                     spots#destroy
+              users_sign_out GET      /users/sign_out(.:format)                                                                users/sessions#destroy
+                        user GET      /users/:id(.:format)                                                                     users/registrations#show
+                 users_index GET      /users(.:format)                                                                         users#index
+                             DELETE   /users/:id(.:format)                                                                     users#destroy
+                   api_spots GET      /api/spots(.:format)                                                                     api/spots#index {:format=>/json/}
+                             POST     /api/spots(.:format)                                                                     api/spots#create {:format=>/json/}
+                new_api_spot GET      /api/spots/new(.:format)                                                                 api/spots#new {:format=>/json/}
+               edit_api_spot GET      /api/spots/:id/edit(.:format)                                                            api/spots#edit {:format=>/json/}
+                    api_spot GET      /api/spots/:id(.:format)                                                                 api/spots#show {:format=>/json/}
+                             PATCH    /api/spots/:id(.:format)                                                                 api/spots#update {:format=>/json/}
+                             PUT      /api/spots/:id(.:format)                                                                 api/spots#update {:format=>/json/}
+                             DELETE   /api/spots/:id(.:format)                                                                 api/spots#destroy {:format=>/json/}
+           api_excite_places GET      /api/excite-places(.:format)                                                             api/spots#index_only_excite_places {:format=>/json/}
+           api_spot_comments GET      /api/spot_comments(.:format)                                                             api/spot_comments#index {:format=>/json/}
+                             POST     /api/spot_comments(.:format)                                                             api/spot_comments#create {:format=>/json/}
+        new_api_spot_comment GET      /api/spot_comments/new(.:format)                                                         api/spot_comments#new {:format=>/json/}
+       edit_api_spot_comment GET      /api/spot_comments/:id/edit(.:format)                                                    api/spot_comments#edit {:format=>/json/}
+            api_spot_comment GET      /api/spot_comments/:id(.:format)                                                         api/spot_comments#show {:format=>/json/}
+                             PATCH    /api/spot_comments/:id(.:format)                                                         api/spot_comments#update {:format=>/json/}
+                             PUT      /api/spot_comments/:id(.:format)                                                         api/spot_comments#update {:format=>/json/}
+                             DELETE   /api/spot_comments/:id(.:format)                                                         api/spot_comments#destroy {:format=>/json/}
+                api_api_docs GET      /api/api_docs(.:format)                                                                  api/api_docs#index {:format=>/json/}
+        new_api_user_session GET      /api/v1/auth/sign_in(.:format)                                                           devise_token_auth/sessions#new {:format=>/json/}
+            api_user_session POST     /api/v1/auth/sign_in(.:format)                                                           devise_token_auth/sessions#create {:format=>/json/}
+    destroy_api_user_session DELETE   /api/v1/auth/sign_out(.:format)                                                          devise_token_auth/sessions#destroy {:format=>/json/}
+       new_api_user_password GET      /api/v1/auth/password/new(.:format)                                                      devise_token_auth/passwords#new {:format=>/json/}
+      edit_api_user_password GET      /api/v1/auth/password/edit(.:format)                                                     devise_token_auth/passwords#edit {:format=>/json/}
+           api_user_password PATCH    /api/v1/auth/password(.:format)                                                          devise_token_auth/passwords#update {:format=>/json/}
+                             PUT      /api/v1/auth/password(.:format)                                                          devise_token_auth/passwords#update {:format=>/json/}
+                             POST     /api/v1/auth/password(.:format)                                                          devise_token_auth/passwords#create {:format=>/json/}
+cancel_api_user_registration GET      /api/v1/auth/cancel(.:format)                                                            devise_token_auth/registrations#cancel {:format=>/json/}
+   new_api_user_registration GET      /api/v1/auth/sign_up(.:format)                                                           devise_token_auth/registrations#new {:format=>/json/}
+  edit_api_user_registration GET      /api/v1/auth/edit(.:format)                                                              devise_token_auth/registrations#edit {:format=>/json/}
+       api_user_registration PATCH    /api/v1/auth(.:format)                                                                   devise_token_auth/registrations#update {:format=>/json/}
+                             PUT      /api/v1/auth(.:format)                                                                   devise_token_auth/registrations#update {:format=>/json/}
+                             DELETE   /api/v1/auth(.:format)                                                                   devise_token_auth/registrations#destroy {:format=>/json/}
+                             POST     /api/v1/auth(.:format)                                                                   devise_token_auth/registrations#create {:format=>/json/}
+  api_v1_auth_validate_token GET      /api/v1/auth/validate_token(.:format)                                                    devise_token_auth/token_validations#validate_token
+         api_v1_auth_failure GET      /api/v1/auth/failure(.:format)                                                           devise_token_auth/omniauth_callbacks#omniauth_failure
+                             GET      /api/v1/auth/:provider/callback(.:format)                                                devise_token_auth/omniauth_callbacks#omniauth_success
+                             GET|POST /omniauth/:provider/callback(.:format)                                                   devise_token_auth/omniauth_callbacks#redirect_callbacks
+            omniauth_failure GET|POST /omniauth/failure(.:format)                                                              devise_token_auth/omniauth_callbacks#omniauth_failure
+                             GET      /api/v1/auth/:provider(.:format)                                                         redirect(301)
+                        root GET      /                                                                                        static_pages#home
+          rails_service_blob GET      /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
+   rails_blob_representation GET      /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
+          rails_disk_service GET      /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
+   update_rails_disk_service PUT      /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
+        rails_direct_uploads POST     /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create

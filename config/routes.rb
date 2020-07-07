@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # mount_devise_token_auth_for 'User', at: 'auth'
   get 'spot_comments/show'
   get 'spot_comments/new'
   get 'spot_comments/create'
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
     get '/excite-places' => 'spots#index_only_excite_places'
     resources :spot_comments
     resources :api_docs, only: [:index]
+    scope :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth'
+    end
   end
 
   root 'static_pages#home'
