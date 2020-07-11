@@ -50,6 +50,11 @@
                              PUT      /api/spot_comments/:id(.:format)                                                         api/spot_comments#update {:format=>/json/}
                              DELETE   /api/spot_comments/:id(.:format)                                                         api/spot_comments#destroy {:format=>/json/}
                 api_api_docs GET      /api/api_docs(.:format)                                                                  api/api_docs#index {:format=>/json/}
+                   api_users GET      /api/users(.:format)                                                                     api/users#index {:format=>/json/}
+                    api_user GET      /api/users/:id(.:format)                                                                 api/users#show {:format=>/json/}
+                             PATCH    /api/users/:id(.:format)                                                                 api/users#update {:format=>/json/}
+                             PUT      /api/users/:id(.:format)                                                                 api/users#update {:format=>/json/}
+                         api GET      /api/user_spots_count_each_mood/:id(.:format)                                            api/users#user_spots_count_each_mood {:format=>/json/}
         new_api_user_session GET      /api/v1/auth/sign_in(.:format)                                                           devise_token_auth/sessions#new {:format=>/json/}
             api_user_session POST     /api/v1/auth/sign_in(.:format)                                                           devise_token_auth/sessions#create {:format=>/json/}
     destroy_api_user_session DELETE   /api/v1/auth/sign_out(.:format)                                                          devise_token_auth/sessions#destroy {:format=>/json/}

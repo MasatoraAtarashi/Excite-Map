@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get '/excite-places' => 'spots#index_only_excite_places'
     resources :spot_comments
     resources :api_docs, only: [:index]
+    resources :users, only: [:index, :show, :update]
+    get '/user_spots_count_each_mood/:id' => 'users#user_spots_count_each_mood'
     scope :v1 do
       mount_devise_token_auth_for 'User', at: 'auth'
     end

@@ -49,6 +49,30 @@ class Spot < ApplicationRecord
   validates :title, length: { maximum: 255 }
   validate  :picture_size
 
+  scope :ochitsuku, ->(spots) do
+    where(mood: '落ち着く')
+  end
+
+  scope :tanoshi, ->(spots) do
+    where(mood: '楽しい')
+  end
+
+  scope :shiawase, ->(spots) do
+    where(mood: '幸せ')
+  end
+
+  scope :yaruki, ->(spots) do
+    where(mood: 'やる気')
+  end
+
+  scope :fuman, ->(spots) do
+    where(mood: '不満')
+  end
+
+  scope :zetsubou, ->(spots) do
+    where(mood: '絶望感')
+  end
+  
   private
 
     def picture_size
