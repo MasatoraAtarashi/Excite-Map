@@ -1,5 +1,7 @@
 class Api::ApplicationController < ApplicationController
-    include DeviseTokenAuth::Concerns::SetUserByToken 
+    include DeviseTokenAuth::Concerns::SetUserByToken
+    protect_from_forgery with: :null_session, if: ->{request.format.json?}
+    
     class ApiError < StandardError
         attr_reader :status, :messages
 
