@@ -2,7 +2,7 @@ class Api::UsersController < Api::ApplicationController
     include Swagger::Blocks
     protect_from_forgery
 
-    before_action :logged_in_user, only: [:show, :update, :user_spots_count_each_mood]
+    before_action :authenticate_user!, only: [:show, :update, :user_spots_count_each_mood]
     before_action :correct_user, only: [:show, :update, :user_spots_count_each_mood]
 
 
@@ -32,12 +32,12 @@ class Api::UsersController < Api::ApplicationController
     # end
     
     def user_spots_count_each_mood
-        ochitsuku_count = Spot.ochitsuku(current_user.spots).length
-        tanoshi_count = Spot.tanoshi(current_user.spots).length
-        shiawase_count = Spot.shiawase(current_user.spots).length
-        yaruki_count = Spot.yaruki(current_user.spots).length
-        fuman_count = Spot.fuman(current_user.spots).length
-        zetsubou_count = Spot.zetsubou(current_user.spots).length
+        ochitsuku_count = Spot.ochitsuku(@user.spots).length
+        tanoshi_count = Spot.tanoshi(@user.spots).length
+        shiawase_count = Spot.shiawase(@user.spots).length
+        yaruki_count = Spot.yaruki(@user.spots).length
+        fuman_count = Spot.fuman(@user.spots).length
+        zetsubou_count = Spot.zetsubou(@user.spots).length
         json = {
             ochitsuku_count:  ochitsuku_count,
             tanoshi_count: tanoshi_count,
@@ -52,12 +52,6 @@ class Api::UsersController < Api::ApplicationController
     private
       def user_params
         params.require(:user).permit(:email, :username)
-      end
-
-      def logged_in_user
-        if current_user.nil?
-            raise ApiError::UnauthorizedError.new(messages: ["認証エラー"])
-        end
       end
 
       def correct_user
