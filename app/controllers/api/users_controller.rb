@@ -32,12 +32,12 @@ class Api::UsersController < Api::ApplicationController
     # end
     
     def user_spots_count_each_mood
-        ochitsuku_count = Spot.ochitsuku(@user.spots).length
-        tanoshi_count = Spot.tanoshi(@user.spots).length
-        shiawase_count = Spot.shiawase(@user.spots).length
-        yaruki_count = Spot.yaruki(@user.spots).length
-        fuman_count = Spot.fuman(@user.spots).length
-        zetsubou_count = Spot.zetsubou(@user.spots).length
+        ochitsuku_count = Spot.ochitsuku(@user).length
+        tanoshi_count = Spot.tanoshi(@user).length
+        shiawase_count = Spot.shiawase(@user).length
+        yaruki_count = Spot.yaruki(@user).length
+        fuman_count = Spot.fuman(@user).length
+        zetsubou_count = Spot.zetsubou(@user).length
         json = {
             ochitsuku_count:  ochitsuku_count,
             tanoshi_count: tanoshi_count,
