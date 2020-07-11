@@ -49,28 +49,28 @@ class Spot < ApplicationRecord
   validates :title, length: { maximum: 255 }
   validate  :picture_size
 
-  scope :ochitsuku, ->(spots) do
-    where(mood: '落ち着く')
+  scope :ochitsuku, ->(user) do
+    where(user_id: user.id).where(mood: '🌱落ち着く')
   end
 
-  scope :tanoshi, ->(spots) do
-    where(mood: '楽しい')
+  scope :tanoshi, ->(user) do
+    where(user_id: user.id).where(mood: '🔆楽しい')
   end
 
-  scope :shiawase, ->(spots) do
-    where(mood: '幸せ')
+  scope :shiawase, ->(user) do
+    where(user_id: user.id).where(mood: '🧤幸せ')
   end
 
-  scope :yaruki, ->(spots) do
-    where(mood: 'やる気')
+  scope :yaruki, ->(user) do
+    where(user_id: user.id).where(mood: '🔥やる気')
   end
 
-  scope :fuman, ->(spots) do
-    where(mood: '不満')
+  scope :fuman, ->(user) do
+    where(user_id: user.id).where(mood: '🌀不満')
   end
 
-  scope :zetsubou, ->(spots) do
-    where(mood: '絶望感')
+  scope :zetsubou, ->(user) do
+    where(user_id: user.id).where(mood: '🚨絶望感')
   end
   
   private
