@@ -1,5 +1,5 @@
 class Api::ApplicationController < ApplicationController
-    
+    include DeviseTokenAuth::Concerns::SetUserByToken 
     class ApiError < StandardError
         attr_reader :status, :messages
 
