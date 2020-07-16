@@ -36,4 +36,6 @@ class User < ApplicationRecord
     end
   end
 
+  mount_uploader :picture, PictureUploader
+
 end
