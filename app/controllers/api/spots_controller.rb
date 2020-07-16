@@ -53,7 +53,12 @@ class Api::SpotsController < ApplicationController
   end
 
   def index
-    @spots = Spot.all
+    keyword = params[:keyword]
+    if keyword
+      @spots = Spot.search_by_keyword(keyword)
+    else
+      @spots = Spot.all
+    end
     @spots = @spots.map do |spot|
       {
         id: spot.id,
@@ -74,7 +79,12 @@ class Api::SpotsController < ApplicationController
   end
 
   def index_only_excite_places
-    @excite_places = Spot.where(is_excite_place: true)
+    keyword = params[:keyword]
+    if keyword
+      @excite_places = Spot.where(is_excite_place: true).search_by_keyword(keyword)
+    else
+      @excite_places = Spot.where(is_excite_place: true)
+    end
     @excite_places = @excite_places.map do |excite_place|
       {
         id: excite_place.id,

@@ -72,6 +72,11 @@ class Spot < ApplicationRecord
   scope :zetsubou, ->(user) do
     where(user_id: user.id).where(mood: '🚨絶望感')
   end
+
+  scope :search_by_keyword, ->(keyword) do
+    where('LOWER(title) LIKE ?', "%#{keyword}%")
+    .or(where('LOWER(description) LIKE ?', "%#{keyword}%"))
+  end
   
   private
 
