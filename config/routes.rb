@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     resources :api_docs, only: [:index]
     resources :users, only: [:index, :show, :update]
     get '/user_spots_count_each_mood/:id' => 'users#user_spots_count_each_mood'
+    get '/users/:id/profile-image' => 'users#show_profile_image'
+    put '/users/:id/profile-image' => 'users#update_profile_image'
     scope :v1 do
       mount_devise_token_auth_for 'User', at: 'auth'
     end

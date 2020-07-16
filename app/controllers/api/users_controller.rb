@@ -26,10 +26,20 @@ class Api::UsersController < Api::ApplicationController
         end
     end
 
-    # def update_image
-    #     @user = User.find(params[:picture])
+    def show_profile_image
+        user = User.find(params[:id])
+        @picture = user.picture
+        render json: { picture: @picture }
+    end
 
-    # end
+    def update_profile_image
+        @user = User.find(params[:id])
+        if @user.update(picture: params[:picture])
+            render json: { picture: @user.picture}
+        else
+            render status: 400, json: { "message": "profile picture updation faild" }
+        end
+    end
     
     def user_spots_count_each_mood
         ochitsuku_count = Spot.ochitsuku(@user).length
