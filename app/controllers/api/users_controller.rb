@@ -2,9 +2,8 @@ class Api::UsersController < Api::ApplicationController
     include Swagger::Blocks
     protect_from_forgery
 
-    before_action :authenticate_user!, only: [:show, :update, :user_spots_count_each_mood]
+    before_action :authenticate_user!, only: [:show, :update, :user_spots_count_each_mood, :current_user]
     before_action :correct_user, only: [:show, :update, :user_spots_count_each_mood]
-
 
     def index
         @users = User.all
@@ -57,6 +56,10 @@ class Api::UsersController < Api::ApplicationController
             zetsubou_count: zetsubou_count
         }
         render json: json
+    end
+
+    def current_user
+        render json: current_user
     end
 
     private
