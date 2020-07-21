@@ -20,7 +20,7 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
 
   def get_resource_from_auth_hash
     super
-     # @resource.credentials = auth_hash["credentials"]
+    set_email
     clean_resource
   end
 
@@ -39,6 +39,10 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       # わかりやすい様に開発時はjsonとして結果を返す
       render json: @resource, status: :ok
     end
+  end
+
+  def set_email
+    @resource.email = "#{@resource.uid}-#{@resource.provider}@example.com"
   end
 
   def clean_resource
