@@ -1,48 +1,42 @@
 # frozen_string_literal: true
 
-class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
+class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
+  include DeviseTokenAuth::Concerns::SetUserByToken
 
-  # You should also create an action method in this controller like this:
-  def twitter
-    callback_from :twitter
+  def redirect_callbacks
+    super
   end
 
-  private
-  def callback_from(provider)
-    provider = provider.to_s
+  def omniauth_success
+    super
+    update_auth_header
+  end
 
-    @user = User.find_for_oauth(request.env['omniauth.auth'])
+  def omniauth_failure
+    super
+  end
 
-    if @user.persisted?
-      flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
-      # sign_in_and_redirect @user, event: :authentication
-      render json: @user, event: :authentication
+  def get_resource_from_auth_hash
+    super
+    set_email
+  end
+
+  def render_data_or_redirect(message, data, user_data = {})
+    if Rails.env.production?
+      if ['inAppBrowser', 'newWindow'].include?(omniauth_window_type)
+        render_data(message, user_data.merge(data))
+      elsif auth_origin_url
+        redirect_to DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(blank: true))
+      else
+        fallback_render data[:error] || 'An error occurred'
+      end
     else
-      session["devise.#{provider}_data"] = request.env['omniauth.auth']
-      # redirect_to new_user_registration_url
-      render @user
+      render json: @resource, status: :ok
     end
   end
 
-  # More info at:
-  # https://github.com/heartcombo/devise#omniauth
+  def set_email
+    @resource.email = "#{@resource.uid}-#{@resource.provider}@example.com"
+  end
 
-  # GET|POST /resource/auth/twitter
-  # def passthru
-  #   super
-  # end
-
-  # GET|POST /users/auth/twitter/callback
-  # def failure
-  #   super
-  # end
-
-  # protected
-
-  # The path used when OmniAuth fails
-  # def after_omniauth_failure_path_for(scope)
-  #   super(scope)
-  # end
 end

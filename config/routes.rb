@@ -27,8 +27,7 @@ Rails.application.routes.draw do
     get '/users/:id/profile-image' => 'users#show_profile_image'
     put '/users/:id/profile-image' => 'users#update_profile_image'
     scope :v1 do
-      # mount_devise_token_auth_for 'User', at: 'auth'
-      mount_devise_token_auth_for 'User', at: 'auth',:controllers => { :omniauth_callbacks => 'omniauth' }, via: [:get, :post]
+      mount_devise_token_auth_for 'User', at: 'auth',:controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }, via: [:get, :post]
     end
   end
 
