@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     resources :spots
     get '/excite-places' => 'spots#index_only_excite_places'
-    get '/current_user' => 'users#current_user'
+    get '/current_user' => 'users#show_current_user'
     resources :spot_comments
     resources :api_docs, only: [:index]
     resources :users, only: [:index, :show, :update]
