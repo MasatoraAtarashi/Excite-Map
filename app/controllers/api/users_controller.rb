@@ -58,7 +58,8 @@ class Api::UsersController < Api::ApplicationController
         render json: json
     end
 
-    def current_user
+    def show_current_user
+        @user = current_user
         render json: current_user
     end
 

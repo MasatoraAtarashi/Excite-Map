@@ -41,7 +41,7 @@
                              PUT      /api/spots/:id(.:format)                                                                 api/spots#update {:format=>/json/}
                              DELETE   /api/spots/:id(.:format)                                                                 api/spots#destroy {:format=>/json/}
            api_excite_places GET      /api/excite-places(.:format)                                                             api/spots#index_only_excite_places {:format=>/json/}
-            api_current_user GET      /api/current_user(.:format)                                                              api/users#current_user {:format=>/json/}
+            api_current_user GET      /api/current_user(.:format)                                                              api/users#show_current_user {:format=>/json/}
            api_spot_comments GET      /api/spot_comments(.:format)                                                             api/spot_comments#index {:format=>/json/}
                              POST     /api/spot_comments(.:format)                                                             api/spot_comments#create {:format=>/json/}
         new_api_spot_comment GET      /api/spot_comments/new(.:format)                                                         api/spot_comments#new {:format=>/json/}
