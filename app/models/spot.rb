@@ -2,7 +2,7 @@ class Spot < ApplicationRecord
   include Swagger::Blocks
 
   swagger_schema :Spot do
-    key :required, [:id, :title, :description, :mood, :picture, :latitude, :longitude, :is_excite_place, :user, :comments]
+    key :required, %i[id title description mood picture latitude longitude is_excite_place user comments]
     property :id do
       key :type, :integer
       key :format, :int64
@@ -76,13 +76,14 @@ class Spot < ApplicationRecord
   scope :search_by_keyword, ->(keyword) do
     where('LOWER(title) LIKE ?', "%#{keyword}%")
     .or(where('LOWER(description) LIKE ?', "%#{keyword}%"))
+    .or(where('LOWER(mood) LIKE ?', "%#{keyword}%"))
   end
-  
+
   private
 
-    def picture_size
-      if picture.size > 5.megabytes
-        errors.add(:picture, "should be less than 5MB")
-      end
+  def picture_size
+    if picture.size > 5.megabytes
+      errors.add(:picture, 'should be less than 5MB')
     end
+  end
 end
