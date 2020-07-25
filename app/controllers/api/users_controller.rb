@@ -13,7 +13,7 @@ class Api::UsersController < Api::ApplicationController
     def show
         @spots = @user.spots
         json = {
-            user: @user
+            user: @user,
             spots: @spots
         }
         render json: json
