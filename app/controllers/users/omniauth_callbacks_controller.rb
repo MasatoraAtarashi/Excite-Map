@@ -22,7 +22,7 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
   end
 
   def render_data_or_redirect(message, data, user_data = {})
-    render html: 'ログインに成功しました。アプリケーションに戻ります。', status: :ok
+    render json: {status: 'ログインに成功しました。アプリケーションに戻ります。'}, status: :ok
   end
 
   def set_email
