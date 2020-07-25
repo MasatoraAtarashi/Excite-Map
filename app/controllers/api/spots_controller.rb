@@ -56,11 +56,13 @@ class Api::SpotsController < ApplicationController
     keyword = params[:keyword]
     page = params[:page] || 1
     limit = params[:limit] || 20
+    user_id = params[:user_id]
     if keyword
       @spots = Spot.order('id DESC').search_by_keyword(keyword).page(page).per(limit)
     else
       @spots = Spot.order('id DESC').page(page).per(limit)
     end
+    @spots = @spots.where(user_id: user_id) if user_id
     @spots = @spots.map do |spot|
       {
         spot: spot,
@@ -75,11 +77,13 @@ class Api::SpotsController < ApplicationController
     keyword = params[:keyword]
     page = params[:page] || 1
     limit = params[:limit] || 20
+    user_id = params[:user_id]
     if keyword
       @excite_places = Spot.order('id DESC').where(is_excite_place: true).search_by_keyword(keyword).page(page).per(limit)
     else
       @excite_places = Spot.order('id DESC').where(is_excite_place: true).page(page).per(limit)
     end
+    @excite_places = @excite_places.where(user_id: user_id) if user_id
     @excite_places = @excite_places.map do |excite_place|
       {
         spot: excite_place,
