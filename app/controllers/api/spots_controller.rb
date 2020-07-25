@@ -54,23 +54,16 @@ class Api::SpotsController < ApplicationController
 
   def index
     keyword = params[:keyword]
+    page = params[:page] || 1
+    limit = params[:limit] || 20
     if keyword
-      @spots = Spot.search_by_keyword(keyword).reverse
+      @spots = Spot.order('id DESC').search_by_keyword(keyword).page(page).per(limit)
     else
-      @spots = Spot.all.reverse
+      @spots = Spot.order('id DESC').page(page).per(limit)
     end
     @spots = @spots.map do |spot|
       {
-        id: spot.id,
-        title: spot.title,
-        description: spot.description,
-        mood: spot.mood,
-        picture: spot.picture.url,
-        latitude: spot.latitude,
-        longitude: spot.longitude,
-        is_excite_place: spot.is_excite_place,
-        created_at: spot.created_at,
-        updated_at: spot.updated_at,
+        spot: spot,
         user: User.find_by(id: spot.user_id),
         comments: SpotComment.where(spot_id: spot.id)
       }
@@ -80,23 +73,16 @@ class Api::SpotsController < ApplicationController
 
   def index_only_excite_places
     keyword = params[:keyword]
+    page = params[:page] || 1
+    limit = params[:limit] || 20
     if keyword
-      @excite_places = Spot.where(is_excite_place: true).search_by_keyword(keyword).reverse
+      @excite_places = Spot.order('id DESC').where(is_excite_place: true).search_by_keyword(keyword).page(page).per(limit)
     else
-      @excite_places = Spot.where(is_excite_place: true).reverse
+      @excite_places = Spot.order('id DESC').where(is_excite_place: true).page(page).per(limit)
     end
     @excite_places = @excite_places.map do |excite_place|
       {
-        id: excite_place.id,
-        title: excite_place.title,
-        description: excite_place.description,
-        mood: excite_place.mood,
-        picture: excite_place.picture.url,
-        latitude: excite_place.latitude,
-        longitude: excite_place.longitude,
-        is_excite_place: excite_place.is_excite_place,
-        created_at: excite_place.created_at,
-        updated_at: excite_place.updated_at,
+        spot: excite_place,
         user: User.find_by(id: excite_place.user_id),
         comments: SpotComment.where(spot_id: excite_place.id)
       }
@@ -108,16 +94,7 @@ class Api::SpotsController < ApplicationController
     @spot = Spot.find(params[:id])
     @spot = 
       {
-        id: @spot.id,
-        title: @spot.title,
-        description: @spot.description,
-        mood: @spot.mood,
-        picture: @spot.picture.url,
-        latitude: @spot.latitude,
-        longitude: @spot.longitude,
-        is_excite_place: @spot.is_excite_place,
-        created_at: @spot.created_at,
-        updated_at: @spot.updated_at,
+        spot: @spot,
         user: User.find_by(id: @spot.user_id),
         comments: SpotComment.where(spot_id: @spot.id)
       }
@@ -129,16 +106,7 @@ class Api::SpotsController < ApplicationController
     if @spot.save
       spot_json =
         {
-          id: @spot.id,
-          title: @spot.title,
-          description: @spot.description,
-          mood: @spot.mood,
-          picture: @spot.picture.url,
-          latitude: @spot.latitude,
-          longitude: @spot.longitude,
-          is_excite_place: @spot.is_excite_place,
-          created_at: @spot.created_at,
-          updated_at: @spot.updated_at,
+          spot: @spot,
           user: User.find_by(id: @spot.user_id),
           comments: SpotComment.where(spot_id: @spot.id)
         }
@@ -153,16 +121,7 @@ class Api::SpotsController < ApplicationController
     if @spot.update(spot_params)
       spot_json =
         {
-          id: @spot.id,
-          title: @spot.title,
-          description: @spot.description,
-          mood: @spot.mood,
-          picture: @spot.picture.url,
-          latitude: @spot.latitude,
-          longitude: @spot.longitude,
-          is_excite_place: @spot.is_excite_place,
-          created_at: @spot.created_at,
-          updated_at: @spot.updated_at,
+          spot: @spot,
           user: User.find_by(id: @spot.user_id),
           comments: SpotComment.where(spot_id: @spot.id)
         }
