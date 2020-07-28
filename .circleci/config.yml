@@ -10,11 +10,14 @@ jobs:
         command: bundle -v
     - run:
         command: bundle install --path vendor/bundle
-    # # Rubocop
+    # Rubocop
+    - run:
+        name: Rubocop
+        command: bundle exec rubocop
     # - run:
-    #     name: Rubocop
-    #     command: bundle exec rubocop
-
+    #     name: Run tests
+    #     command: |
+    #       export
 workflows:
   version: 2
   workflow:
