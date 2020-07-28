@@ -14,10 +14,10 @@ jobs:
     - run:
         name: Rubocop
         command: bundle exec rubocop
-    # - run:
-    #     name: Run tests
-    #     command: |
-    #       export
+    - run:
+        name: Run tests
+        command: |
+          bundle exec rspec
 workflows:
   version: 2
   workflow:
