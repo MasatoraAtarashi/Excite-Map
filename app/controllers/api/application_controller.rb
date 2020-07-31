@@ -1,28 +1,28 @@
 class Api::ApplicationController < ApplicationController
-    include DeviseTokenAuth::Concerns::SetUserByToken
-    protect_from_forgery with: :null_session, if: ->{request.format.json?}
-    
-    class ApiError < StandardError
-        attr_reader :status, :messages
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  protect_from_forgery with: :null_session, if: -> { request.format.json? }
 
-        def initialize(status: 400, messages: [])
-            @status = status
-            @messages = messages
-        end
+  class ApiError < StandardError
+    attr_reader :status, :messages
 
-        class UnauthorizedError < ApiError
-            def initialize(messages: [])
-                super(status: 401, messages: messages)
-            end
-        end
+    def initialize(status: 400, messages: [])
+      @status = status
+      @messages = messages
     end
 
-    rescue_from ApiError, with: :render_error
-
-    def render_error(e)
-        render json: {
-            messages: e.messages,
-            status: e.status
-        }
+    class UnauthorizedError < ApiError
+      def initialize(messages: [])
+        super(status: 401, messages: messages)
+      end
     end
+  end
+
+  rescue_from ApiError, with: :render_error
+
+  def render_error(e)
+    render json: {
+        messages: e.messages,
+        status: e.status
+    }
+  end
 end

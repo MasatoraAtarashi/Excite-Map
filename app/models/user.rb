@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :liked_spots, through: :likes, source: :spot
 
   swagger_schema :User do
-    key :required, [:id, :email, :created_at, :updated_at, :provider, :uid, :username, :admin]
+    key :required, %i[id email created_at updated_at provider uid username admin]
     property :id do
       key :type, :integer
       key :format, :int64
@@ -42,7 +42,7 @@ class User < ApplicationRecord
   mount_uploader :picture, PictureUploader
 
   def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
+    user = User.find_by(uid: auth.uid, provider: auth.provider)
 
     unless user
       user = User.create(

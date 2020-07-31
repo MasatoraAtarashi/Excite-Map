@@ -6,6 +6,6 @@ class CreateSpotComments < ActiveRecord::Migration[5.2]
       t.references :spot, foreign_key: true
       t.timestamps
     end
-    add_index :spot_comments, [:user_id, :spot_id], unique: true
+    add_index :spot_comments, %i[user_id spot_id], unique: true
   end
 end

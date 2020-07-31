@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # include DeviseTokenAuth::Concerns::SetUserByToken
   # protect_from_forgery with: :null_session
-  protect_from_forgery with: :null_session, if: ->{request.format.json?}
+  protect_from_forgery with: :null_session, if: -> { request.format.json? }
 
   def logged_in_user
     unless user_signed_in?
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
-  
+
   def after_sign_up_path_for(resource)
     admin_path
   end
