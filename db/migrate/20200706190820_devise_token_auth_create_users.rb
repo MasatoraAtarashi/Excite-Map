@@ -21,7 +21,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[5.2]
     end
 
     # to speed up lookups to these columns:
-    add_index :users, [:uid, :provider], unique: true
+    add_index :users, %i[uid provider], unique: true
   end
 
 end

@@ -96,7 +96,7 @@ class Api::SpotsController < ApplicationController
 
   def show
     @spot = Spot.find(params[:id])
-    @spot = 
+    @spot =
       {
         spot: @spot,
         user: User.find_by(id: @spot.user_id),
@@ -116,7 +116,7 @@ class Api::SpotsController < ApplicationController
         }
       render json: spot_json
     else
-      render status: 400, json: { "message": "spot creation faild" }
+      render status: :bad_request, json: { "message": 'spot creation faild' }
     end
   end
 
@@ -131,17 +131,17 @@ class Api::SpotsController < ApplicationController
         }
       render json: spot_json
     else
-      render status: 400, json: { "message": "spot updation faild" }
+      render status: :bad_request, json: { "message": 'spot updation faild' }
     end
   end
 
   def destroy
     Spot.find(params[:id]).destroy
-    render json: { "message": "spot successfully removed" }
+    render json: { "message": 'spot successfully removed' }
   end
 
   private
-    def spot_params
-      params.require(:spot).permit(:id, :title, :description, :mood, :picture, :latitude, :longitude, :user_id, :is_excite_place)
-    end
+  def spot_params
+    params.require(:spot).permit(:id, :title, :description, :mood, :picture, :latitude, :longitude, :user_id, :is_excite_place)
+  end
 end
