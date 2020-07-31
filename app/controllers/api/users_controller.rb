@@ -2,8 +2,8 @@ class Api::UsersController < Api::ApplicationController
     include Swagger::Blocks
     protect_from_forgery
 
-    before_action :authenticate_user!, only: [:show, :update, :user_spots_count_each_mood, :current_user]
-    before_action :correct_user, only: [:show, :update, :user_spots_count_each_mood]
+    before_action :authenticate_user!, only: [:show, :update, :user_spots_count_each_mood, :current_user, :likes, :already_liked?]
+    before_action :correct_user, only: [:show, :update, :user_spots_count_each_mood, :likes, :already_liked?]
 
     def index
         @users = User.all
@@ -59,8 +59,21 @@ class Api::UsersController < Api::ApplicationController
     end
 
     def show_current_user
-        @user = current_user
         render json: current_user
+    end
+
+    def likes
+        likes = current_user.likes
+        @spots = []
+        likes.map do |like|
+            @spots.push(Spot.find(like.spot_id))
+        end
+        render json: @spots
+    end
+
+    def already_liked?
+        @already_liked = @user.likes.exists?(spot_id: params[:spot_id])
+        render json: { already_liked?: @already_liked }
     end
 
     private
