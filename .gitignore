@@ -27,4 +27,4 @@
 /config/master.key
 /config/initializers/carrier_wave.rb
 
-vender/
+vender/*
