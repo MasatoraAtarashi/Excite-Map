@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # mount_devise_token_auth_for 'User', at: 'auth'
   get 'spot_comments/show'
   get 'spot_comments/new'
   get 'spot_comments/create'
@@ -18,7 +17,9 @@ Rails.application.routes.draw do
   end
 
   namespace :api, {format: 'json'} do
-    resources :spots
+    resources :spots do
+      resources :likes, only: [:create, :destroy]
+    end
     get '/excite-places' => 'spots#index_only_excite_places'
     get '/current_user' => 'users#show_current_user'
     resources :spot_comments
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
     get '/user_spots_count_each_mood/:id' => 'users#user_spots_count_each_mood'
     get '/users/:id/profile-image' => 'users#show_profile_image'
     put '/users/:id/profile-image' => 'users#update_profile_image'
+    get '/users/:id/likes' => 'users#likes'
+    get '/users/:id/like/:spot_id' => 'users#already_liked?'
     scope :v1 do
       mount_devise_token_auth_for 'User', at: 'auth',:controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }, via: [:get, :post]
     end

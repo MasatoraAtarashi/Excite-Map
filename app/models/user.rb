@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_many :spots, dependent: :destroy
   has_many :spot_comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_spots, through: :likes, source: :spot
 
   swagger_schema :User do
     key :required, [:id, :email, :created_at, :updated_at, :provider, :uid, :username, :admin]
@@ -55,7 +57,6 @@ class User < ApplicationRecord
   end
 
   private
-
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
   end

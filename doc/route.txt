@@ -32,6 +32,8 @@
                         user GET      /users/:id(.:format)                                                                     users/registrations#show
                  users_index GET      /users(.:format)                                                                         users#index
                              DELETE   /users/:id(.:format)                                                                     users#destroy
+              api_spot_likes POST     /api/spots/:spot_id/likes(.:format)                                                      api/likes#create {:format=>/json/}
+               api_spot_like DELETE   /api/spots/:spot_id/likes/:id(.:format)                                                  api/likes#destroy {:format=>/json/}
                    api_spots GET      /api/spots(.:format)                                                                     api/spots#index {:format=>/json/}
                              POST     /api/spots(.:format)                                                                     api/spots#create {:format=>/json/}
                 new_api_spot GET      /api/spots/new(.:format)                                                                 api/spots#new {:format=>/json/}
@@ -58,6 +60,8 @@
                          api GET      /api/user_spots_count_each_mood/:id(.:format)                                            api/users#user_spots_count_each_mood {:format=>/json/}
                              GET      /api/users/:id/profile-image(.:format)                                                   api/users#show_profile_image {:format=>/json/}
                              PUT      /api/users/:id/profile-image(.:format)                                                   api/users#update_profile_image {:format=>/json/}
+                             GET      /api/users/:id/likes(.:format)                                                           api/users#likes {:format=>/json/}
+                             GET      /api/users/:id/like/:spot_id(.:format)                                                   api/users#already_liked? {:format=>/json/}
         new_api_user_session GET      /api/v1/auth/sign_in(.:format)                                                           devise_token_auth/sessions#new {:format=>/json/}
             api_user_session POST     /api/v1/auth/sign_in(.:format)                                                           devise_token_auth/sessions#create {:format=>/json/}
     destroy_api_user_session DELETE   /api/v1/auth/sign_out(.:format)                                                          devise_token_auth/sessions#destroy {:format=>/json/}
