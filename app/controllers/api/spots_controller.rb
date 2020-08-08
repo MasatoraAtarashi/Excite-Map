@@ -62,7 +62,7 @@ class Api::SpotsController < ApplicationController
     else
       @spots = Spot.order('id DESC').page(page).per(limit)
     end
-    @spots = @spots.where(user_id: user_id) if user_id
+    @spots = @spots.order('id DESC').where(user_id: user_id) if user_id
     @spots = @spots.map do |spot|
       {
         spot: spot,
@@ -83,7 +83,7 @@ class Api::SpotsController < ApplicationController
     else
       @excite_places = Spot.order('id DESC').where(is_excite_place: true).page(page).per(limit)
     end
-    @excite_places = @excite_places.where(user_id: user_id) if user_id
+    @excite_places = @excite_places.order('id DESC').where(user_id: user_id) if user_id
     @excite_places = @excite_places.map do |excite_place|
       {
         spot: excite_place,
