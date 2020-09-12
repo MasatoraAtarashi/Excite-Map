@@ -1,12 +1,18 @@
 <div class="col-md-8">
-<% if @users.any? && current_user.admin %>
+<% if @users.any? %>
   <h3>ユーザ一覧 (<%= @users.count %>)</h3>
   <% @users.map do |user| %>
     <%= "id: #{user.id}" %>
     </br>
     <%= "name: #{user.username}" %>
     </br>
+    <%= "メアド: #{user.email}" %>
+    </br>
     <%= "登録日: #{user.created_at}" %>
+    </br>
+    <%= "最終ログイン: #{user.last_sign_in_at}" %>
+    </br>
+    <%= "ログイン回数: #{user.sign_in_count}" %>
     </br>
     <%= "プレイス投稿数: #{user.spots.count}" %>
     <% if user_signed_in? %>
