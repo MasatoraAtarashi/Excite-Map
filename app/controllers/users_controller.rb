@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @users = User.all.order(id: "DESC")
+    @users = User.all.order(id: 'DESC')
   end
 
   def destroy
