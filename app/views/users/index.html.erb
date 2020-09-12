@@ -1,15 +1,20 @@
 <div class="col-md-8">
-<% if @users.any? %>
+<% if @users.any? && current_user.admin %>
   <h3>ユーザ一覧 (<%= @users.count %>)</h3>
   <% @users.map do |user| %>
     <%= "id: #{user.id}" %>
     </br>
-    <%= "email: #{user.email}" %>
+    <%= "name: #{user.username}" %>
+    </br>
+    <%= "登録日: #{user.created_at}" %>
+    </br>
+    <%= "プレイス投稿数: #{user.spots.count}" %>
     <% if user_signed_in? %>
         <% if current_user.admin && !user.admin %>
             <%= button_to 'delete', user, method: :delete, data: { confirm: "You sure?" } %>
         <% end %> 
     <% end %>
+    </br>
     </br>
   <% end %>
 <% else %>

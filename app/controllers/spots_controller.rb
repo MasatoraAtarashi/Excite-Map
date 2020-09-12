@@ -3,7 +3,7 @@ class SpotsController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @spots = Spot.all
+    @spots = Spot.all.order(id: "DESC")
   end
 
   def show
