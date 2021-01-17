@@ -58,11 +58,11 @@ class Api::SpotsController < ApplicationController
     limit = params[:limit] || 20
     user_id = params[:user_id]
     if keyword
-      @spots = Spot.order('id DESC').search_by_keyword(keyword).page(page).per(limit)
+      @spots = Spot.order('created_at DESC').search_by_keyword(keyword).page(page).per(limit)
     else
-      @spots = Spot.order('id DESC').page(page).per(limit)
+      @spots = Spot.order('created_at DESC').page(page).per(limit)
     end
-    @spots = @spots.order('id DESC').where(user_id: user_id) if user_id
+    @spots = @spots.order('created_at DESC').where(user_id: user_id) if user_id
     @spots = @spots.map do |spot|
       {
         spot: spot,
@@ -79,11 +79,11 @@ class Api::SpotsController < ApplicationController
     limit = params[:limit] || 20
     user_id = params[:user_id]
     if keyword
-      @excite_places = Spot.order('id DESC').where(is_excite_place: true).search_by_keyword(keyword).page(page).per(limit)
+      @excite_places = Spot.order('created_at DESC').where(is_excite_place: true).search_by_keyword(keyword).page(page).per(limit)
     else
-      @excite_places = Spot.order('id DESC').where(is_excite_place: true).page(page).per(limit)
+      @excite_places = Spot.order('created_at DESC').where(is_excite_place: true).page(page).per(limit)
     end
-    @excite_places = @excite_places.order('id DESC').where(user_id: user_id) if user_id
+    @excite_places = @excite_places.order('created_at DESC').where(user_id: user_id) if user_id
     @excite_places = @excite_places.map do |excite_place|
       {
         spot: excite_place,
