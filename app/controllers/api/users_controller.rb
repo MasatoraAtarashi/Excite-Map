@@ -14,7 +14,7 @@ class Api::UsersController < Api::ApplicationController
     @spots = @user.spots
     json = {
         user: @user,
-        spots: @spots.order('id DESC')
+        spots: @spots.order('created_at DESC')
     }
     render json: json
   end
