@@ -46,6 +46,7 @@ Excite Mapは散歩に特化した地図アプリです。
 ```
 $ heroku container:login
 $ heroku container:push -a excite-map
+$ heroku container:release web -a excite-map
 ```
 
 # その他
