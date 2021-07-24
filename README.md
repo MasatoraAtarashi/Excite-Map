@@ -41,6 +41,13 @@ Excite Mapは散歩に特化した地図アプリです。
 エキサイトプレイス登録時は、プライバシー侵害にご注意ください。
 立ち入り禁止区域や危険な場所でのご利用はお控えください。
 
+# 開発
+## デプロイ
+```
+$ heroku container:login
+$ heroku container:push -a excite-map
+```
+
 # その他
 ## API Document
 - http://redocly.github.io/redoc/?url=http://54.168.87.215/api/api_docs.json#operation/find_spot_by_id
